@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/docopt/docopt-go"
 )
@@ -22,5 +23,12 @@ func main() {
 	if err != nil {
 		fmt.Println(err)
 
+	}
+	for _, v := range args.File {
+		content, err := os.ReadFile(v)
+		if err != nil {
+			panic("error while reading file")
+		}
+		fmt.Println(string(content))
 	}
 }
