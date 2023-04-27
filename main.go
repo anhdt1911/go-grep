@@ -1,12 +1,26 @@
 package main
 
-import "github.com/docopt/docopt-go"
+import (
+	"fmt"
 
-const (
-	Usage = "\nUsage: rep [options] <pattern> [<file> ...]\n"
+	"github.com/docopt/docopt-go"
 )
 
+const Usage = `
+Usage: ggr <Pattern> [<File> ...]
+`
+
+type Args struct {
+	Pattern string
+	File    []string
+}
+
 func main() {
-	args, err := docopt.ParseDoc(Usage)
-	println(args, err)
+	opts, _ := docopt.ParseDoc(Usage)
+	var args Args
+	err := opts.Bind(&args)
+	if err != nil {
+		fmt.Println(err)
+
+	}
 }
